@@ -1,5 +1,5 @@
 locals {
-  prefix = "limwj-test"
+  prefix = "limwj-terraform"
 }
 
 resource "aws_ecr_repository" "ecr" {
