@@ -30,14 +30,14 @@ module "ecs" {
         limwj-ecs = { #container name
           essential = true
           image     = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/${local.prefix}-ecr:latest"
-          # image = "public.ecr.aws/docker/library/httpd:latest"
+          # image = "public.ecr.aws/docker/library/httpd:latest" #for step 1 
           port_mappings = [
             {
-              containerPort = 80
+              containerPort = 8080
               protocol      = "tcp"
             }
           ]
-          readonly_root_filesystem = false
+          # readonly_root_filesystem = false  #for step 1 
         }
       }
       assign_public_ip                   = true
@@ -57,6 +57,6 @@ module "ecs_sg" {
   vpc_id      = data.aws_vpc.default.id
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
-  ingress_rules       = ["http-80-tcp"]
+  ingress_rules       = ["http-8080-tcp"]
   egress_rules        = ["all-all"]
 }
